@@ -7,6 +7,11 @@ import java.util.Random;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+/**
+ * 终止操作分为两类
+ * 非短路操作
+ * 短路操作 不需要等待所有数据都计算完就可以结束流
+ */
 public class StreamDemo4 {
 
     public static void main(String[] args) {

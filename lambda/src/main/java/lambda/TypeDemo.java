@@ -15,7 +15,8 @@ public class TypeDemo {
 
     public static void main(String[] args) {
         // 变量类型定义
-        IMath lambda = (x, y) -> x + y;
+//        IMath lambda = (x, y) -> x + y;
+        IMath lambda = Integer::sum;
 
         // 数组里
         IMath[] lambdas = {(x, y) -> x + y};

@@ -115,6 +115,10 @@ public class CollectDemo {
                 .collect(Collectors.toCollection(TreeSet::new));
         System.out.println("所有学生的年龄:" + ages);
 
+//        Function<Student,Integer> function = Student::getAge;
+//        Supplier<List> a = ArrayList::new;
+        List<Integer> ageList = students.stream().map(Student::getAge).collect(Collectors.toList());
+        System.out.println("所有学生的年龄:" + ageList);
         // 统计汇总信息
         IntSummaryStatistics agesSummaryStatistics = students.stream()
                 .collect(Collectors.summarizingInt(Student::getAge));

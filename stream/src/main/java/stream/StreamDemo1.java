@@ -15,6 +15,7 @@ public class StreamDemo1 {
 
         // 使用stream的内部迭代
         // map就是中间操作（返回stream的操作）
+        // 返回stream流就是中间操作 否则就是终止
         // sum就是终止操作
         int sum22 = IntStream.of(nums).sum();
         System.out.println("=========" + sum22);
@@ -22,13 +23,13 @@ public class StreamDemo1 {
         int sum2 = IntStream.of(nums).map(StreamDemo1::doubleNum).sum();
         System.out.println("结果为：" + sum2);
 
-        System.out.println("惰性求值就是终止没有调用的情况下，中间操作不会执行");
+        System.out.println("惰性求值就是终止操作没有调用的情况下，中间操作不会执行");
         IntStream.of(nums).map(StreamDemo1::doubleNum);
 
 
     }
 
-    public static int doubleNum(int i) {
+    private static int doubleNum(int i) {
         int j = i * 2;
         System.out.println(i + "执行了乘以2=" + j);
         return j;

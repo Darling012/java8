@@ -2,6 +2,11 @@ package stream;
 
 import java.util.stream.Stream;
 
+/**
+ * 中间操作包含两类
+ * 无状态操作 当前操作跟其他元素没有关系
+ * 有状态操作 依赖其他元素 例如排序
+ */
 public class StreamDemo3 {
 
     public static void main(String[] args) {

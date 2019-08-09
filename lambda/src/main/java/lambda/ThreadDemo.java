@@ -15,7 +15,8 @@ public class ThreadDemo {
         // jdk8 lambda
         Object target2 = (Runnable) () -> System.out.println("ok");
         Runnable target3 = () -> System.out.println("ok");
-        System.out.println(target2 == target3); // false
+        // false
+        System.out.println(target2 == target3);
 
         new Thread((Runnable) target2).start();
     }

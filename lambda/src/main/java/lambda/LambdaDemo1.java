@@ -1,14 +1,17 @@
 package lambda;
 
+// 编译期间校验
 @FunctionalInterface
 interface Interface1 {
     int doubleNum(int i);
 
     default int add(int x, int y) {
+        x = this.doubleNum(x);
         return x + y;
     }
 
     static int sub(int x, int y) {
+
         return x - y;
     }
 }
