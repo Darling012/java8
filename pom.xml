@@ -12,9 +12,6 @@
         <module>lambda</module>
         <module>stream</module>
         <module>java9</module>
-        <module>webflux</module>
-        <module>webflux2</module>
-        <module>webfluxclient</module>
     </modules>
 
 
