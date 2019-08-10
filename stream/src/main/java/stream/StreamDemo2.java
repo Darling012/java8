@@ -16,13 +16,23 @@ public class StreamDemo2 {
         list.stream();
         list.parallelStream();
 
-        // 从数组创建
-        Arrays.stream(new int[]{2, 3, 5});
+        // 从数组创建 通过Arrays中得静态方法stream（）获取数组流
+        IntStream intStream = Arrays.stream(new int[]{1, 2, 3});
+
+        // 通过Stream类中得 of（）静态方法获取流
+        Stream<String> streamStr = Stream.of("a", "b", "c");
 
         // 创建数字流
         IntStream.of(1, 2, 3);
         // 带边界
         IntStream.rangeClosed(1, 10);
+
+
+        //迭代（需要传入一个种子，也就是起始值，然后传入一个一元操作）
+        Stream<Integer> stream1 = Stream.iterate(2, (x) -> x * 2);
+
+        //生成(无限产生对象)
+        Stream<Double> stream2 = Stream.generate(() -> Math.random());
 
         // 使用random创建一个无限流
         new Random().ints().limit(10);

@@ -2,9 +2,9 @@ package lambda;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.function.BiFunction;
 import java.util.function.Consumer;
 import java.util.function.Function;
+import java.util.function.IntUnaryOperator;
 import java.util.function.Supplier;
 
 class Dog {
@@ -57,6 +57,11 @@ class Dog {
     }
 }
 
+/**
+ * objectName::instanceMethod
+ * ClassName::staticMethod
+ * ClassName::instanceMethod
+ */
 public class MethodRefrenceDemo {
 
     public static void main(String[] args) {
@@ -74,22 +79,22 @@ public class MethodRefrenceDemo {
 
         Dog.bark(dog);
         // 非静态方法，使用对象实例的方法引用
-        Function<Integer, Integer> function = dog::eat;
+//        Function<Integer, Integer> function = dog::eat;
         // 输入 输出一样改为 一元函数
 //         UnaryOperator<Integer> function = dog::eat;
-//         IntUnaryOperator function = dog::eat;
-        function.apply(1);
+        IntUnaryOperator function = dog::eat;
+//        function.apply(1);
 //         function.applyAsInt(1);
 
         // 使用类名来方法引用  非静态方法
         // 两个输入 一个输出
-        BiFunction<Dog, Integer, Integer> eatFunction = Dog::eat;
-        System.out.println("还剩下" + eatFunction.apply(dog, 2) + "斤");
+//        BiFunction<Dog, Integer, Integer> eatFunction = Dog::eat;
+//        System.out.println("还剩下" + eatFunction.apply(dog, 2) + "斤");
 
-        // // dog置空，不影响下面的函数执行，因为java 参数是传值
-        // dog = null;
-        // System.out.println("还剩下" + function.applyAsInt(2) + "斤");
-        //
+        //  dog置空，不影响下面的函数执行，因为java 参数是传值
+        // 这里应该是形参依旧指向堆中数据 而 dog 指向变了
+        dog = null;
+        System.out.println("还剩下" + function.applyAsInt(2) + "斤");
 
 
         // 构造函数的方法引用

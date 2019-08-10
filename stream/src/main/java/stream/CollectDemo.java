@@ -115,6 +115,9 @@ public class CollectDemo {
                 .collect(Collectors.toCollection(TreeSet::new));
         System.out.println("所有学生的年龄:" + ages);
 
+        // 计算所有学生年龄的和
+        Optional<Integer> ageSum = students.stream().map(Student::getAge).reduce(Integer::sum);
+        System.out.println(ageSum.orElse(-1));
 //        Function<Student,Integer> function = Student::getAge;
 //        Supplier<List> a = ArrayList::new;
         List<Integer> ageList = students.stream().map(Student::getAge).collect(Collectors.toList());

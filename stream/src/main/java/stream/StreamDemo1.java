@@ -2,6 +2,11 @@ package stream;
 
 import java.util.stream.IntStream;
 
+/**
+ * 1 Stream 自己不会存储元素
+ * 2 Stream 不会改变源对象。相反，他们会返回一个持有结果的性stream 。
+ * 3 Stream 操作是延迟执行的。这以为这他们会等到需要结果的时候才执行（延迟加载）
+ */
 public class StreamDemo1 {
 
     public static void main(String[] args) {
