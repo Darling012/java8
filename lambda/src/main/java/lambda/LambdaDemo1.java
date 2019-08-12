@@ -1,6 +1,12 @@
 package lambda;
 
+/**
+ * 函数式接口里允许定义默认方法
+ * 函数式接口里允许定义静态方法
+ * 函数式接口里允许定义java.lang.Object里的public方法
+ */
 // 编译期间校验
+// 加不加@FunctionalInterface对于接口是不是函数式接口没有影响，该注解知识提醒编译器去检查该接口是否仅包含一个抽象方法
 @FunctionalInterface
 interface Interface1 {
     int doubleNum(int i);
@@ -10,9 +16,17 @@ interface Interface1 {
         return x + y;
     }
 
+    default String add() {
+        return null;
+    }
+
     static int sub(int x, int y) {
 
         return x - y;
+    }
+
+    static String pub() {
+        return null;
     }
 }
 

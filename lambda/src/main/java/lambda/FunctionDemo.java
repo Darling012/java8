@@ -17,8 +17,7 @@ public class FunctionDemo {
         IntPredicate predicate = i -> i > 0;
         System.out.println(predicate.test(-9));
 
-        //
-        // IntConsumer
+
 
         // 消费函数接口
         // 消费者 消费数据 接收参数,返回void  数据被消费了
@@ -39,7 +38,7 @@ public class FunctionDemo {
         System.out.println(supplier.get());
 
         // 一元函数（输出输入类型相同） UnaryOperator<T>
-        UnaryOperator<String> unaryOperator = str -> str;
+        UnaryOperator<String> unaryOperator = str -> str + "a";
         System.out.println(unaryOperator.apply("unaryOperator"));
 
         // BiFunction<T,U,R> 2个输入函数

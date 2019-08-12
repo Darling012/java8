@@ -11,6 +11,9 @@ public class LambdaTest {
         void sayMessage(String message);
     }
 
+    private int operate(int a, int b, MathOperation mathOperation) {
+        return mathOperation.operation(a, b);
+    }
 
     public static void main(String args[]) {
         LambdaTest tester = new LambdaTest();
@@ -43,7 +46,5 @@ public class LambdaTest {
         greetService2.sayMessage("Google");
     }
 
-    private int operate(int a, int b, MathOperation mathOperation) {
-        return mathOperation.operation(a, b);
-    }
+
 }
