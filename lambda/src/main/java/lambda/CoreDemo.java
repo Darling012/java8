@@ -30,6 +30,13 @@ public class CoreDemo {
 
         demo.test2();
         // demo.test2();
+
+        String str = "dfs";
+        {
+            if ("id".equals(str)) {
+                System.out.println();
+            }
+        }
     }
 
     public void test2() {
