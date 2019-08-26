@@ -4,7 +4,10 @@ import org.apache.commons.collections4.MapUtils;
 
 import java.util.*;
 
+import static java.util.function.Function.identity;
 import static java.util.stream.Collectors.*;
+
+// import static java.util.function.Function.identity;
 
 /**
  * @program: java8
@@ -29,7 +32,15 @@ public class CollectorsDemo {
         // hashSet会去重复
         Set<String> userSet = list.stream().map(User::getName).collect(toSet());
         System.out.println(userSet);
+        // 转换为map
+        // Map<String,User> userMap = list.stream().collect(toMap(User::getId,user -> user));
+        Map<String, User> userMapId = list.stream().collect(toMap(User::getId, identity()));
+        MapUtils.verbosePrint(System.out, "收集到MapId", userMapId);
+        Map<String, User> userMapName = list.stream().collect(toMap(User::getName, identity(), (t1, t2) -> t1));
+        Map<String, User> userLinkedHashMapName = list.stream().collect(toMap(User::getName, identity(), (t1, t2) -> t1, LinkedHashMap::new));
+        Map<String, User> userConcurrentMapMapName = list.stream().collect(toConcurrentMap(User::getName, identity(), (t1, t2) -> t1));
 
+        MapUtils.verbosePrint(System.out, "收集到MapName", userMapName);
         // 3 将流转换成其他集合
         Set<String> userSet1 = list.stream().map(User::getName).collect(toCollection(LinkedHashSet::new));
         System.out.println(userSet1);
@@ -37,8 +48,8 @@ public class CollectorsDemo {
         // 4 Collectors.counting() 元素个数
         Long collectCount = list.stream().map(User::getAge).distinct().collect(counting());
         Long collectCount1 = list.stream().map(User::getAge).distinct().count();
-//        Long collectCount1 = list.stream().count();
-//        Long collectCount2 = (long) list.size();
+        //        Long collectCount1 = list.stream().count();
+        //        Long collectCount2 = (long) list.size();
 
         // 5 将流转换为其他形式 ， 接受一个collectors接口的实现，用于给Stream中元素做汇总的方法
 
@@ -63,7 +74,7 @@ public class CollectorsDemo {
         Optional total = list.stream().map(User::getAge).reduce(Integer::sum);
         System.out.println(total.orElse(-1));
         // 经常会用BigDecimal来记录金钱，假设想得到BigDecimal的总和：
-//        BigDecimal sum = list.stream() .map(User::getAge).reduce(BigDecimal.ZERO,BigDecimal::add);
+        //        BigDecimal sum = list.stream() .map(User::getAge).reduce(BigDecimal.ZERO,BigDecimal::add);
 
 
         // 元素转换为其他形式

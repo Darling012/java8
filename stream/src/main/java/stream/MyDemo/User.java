@@ -10,6 +10,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Builder
 class User {
+    private String id;
     //姓名
     private String name;
     //年龄
