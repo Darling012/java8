@@ -22,11 +22,11 @@ public class LambdaTest {
         MathOperation addition = (int a, int b) -> a + b;
         System.out.println("10 + 5 = " + tester.operate(10, 5, addition));
 
-        // 不用类型声明
+        // 不用类型声明 expression
         MathOperation subtraction = (a, b) -> a - b;
         System.out.println("10 - 5 = " + tester.operate(10, 5, subtraction));
 
-        // 大括号中的返回语句
+        // 大括号中的返回语句 statement
         MathOperation multiplication = (int a, int b) -> {
             return a * b;
         };
