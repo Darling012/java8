@@ -12,7 +12,7 @@ import java.util.List;
 class Data {
     static List<User> getData() {
         List<User> list = Arrays.asList(
-                new User("1", "钢铁侠", 40, 0, "华盛顿"),
+                new User("1", "钢铁侠", null, 0, "华盛顿"),
                 new User("2", "钢铁侠", 40, 1, "华盛顿"),
                 new User("3", "蜘蛛侠", 20, 0, "华盛顿"),
                 new User("4", "赵丽颖", 30, 1, "湖北武汉市"),

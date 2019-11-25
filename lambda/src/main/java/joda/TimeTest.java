@@ -14,6 +14,8 @@ import java.util.TreeSet;
 public class TimeTest {
     public static void main(String[] args) {
         LocalDate localDate = LocalDate.now();
+        String time1 = localDate.toString();
+        System.out.println("time" + time1);
         System.out.println(localDate);
 
         System.out.println(localDate.getYear() + ", " + localDate.getMonthValue() + ", " + localDate.getDayOfMonth());
