@@ -16,9 +16,12 @@ interface Interface1 {
         return x + y;
     }
 
+    // int add(int x, int y);
     default String add() {
         return null;
     }
+
+    String toString();
 
     static int sub(int x, int y) {
 

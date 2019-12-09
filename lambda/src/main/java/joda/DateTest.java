@@ -3,6 +3,7 @@ package joda;
 import java.time.*;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
+import java.time.temporal.TemporalAdjusters;
 import java.util.Date;
 
 public class DateTest {
@@ -87,6 +88,16 @@ public class DateTest {
 
         LocalDate nextYear = today.plus(1, ChronoUnit.YEARS);
         System.out.println("Date after 1 year : " + nextYear);
+    }
+
+    public void getMonthlyFirstAndEnd() {
+        LocalDate today = LocalDate.now();
+        //本月的第一天
+        LocalDate firstday = LocalDate.of(today.getYear(), today.getMonth(), 1);
+        //本月的最后一天
+        LocalDate lastDay = today.with(TemporalAdjusters.lastDayOfMonth());
+        System.out.println("本月的第一天" + firstday);
+        System.out.println("本月的最后一天" + lastDay);
     }
 
     public void clock() {
