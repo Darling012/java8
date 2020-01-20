@@ -190,9 +190,9 @@ public class DateTest {
     }
 
     public static void main(String[] args) {
-        DateTest dt = new DateTest();
-
-        dt.formateDate();
+        // DateTest dt = new DateTest();
+        //
+        // dt.formateDate();
     }
 
 }
