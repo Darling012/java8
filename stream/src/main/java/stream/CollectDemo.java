@@ -2,7 +2,13 @@ package stream;
 
 import org.apache.commons.collections4.MapUtils;
 
-import java.util.*;
+import java.util.Arrays;
+import java.util.IntSummaryStatistics;
+import java.util.List;
+import java.util.Map;
+import java.util.Optional;
+import java.util.Set;
+import java.util.TreeSet;
 import java.util.stream.Collectors;
 
 /**
@@ -118,8 +124,8 @@ public class CollectDemo {
         // 计算所有学生年龄的和
         Optional<Integer> ageSum = students.stream().map(Student::getAge).reduce(Integer::sum);
         System.out.println(ageSum.orElse(-1));
-//        Function<Student,Integer> function = Student::getAge;
-//        Supplier<List> a = ArrayList::new;
+        //        Function<Student,Integer> function = Student::getAge;
+        //        Supplier<List> a = ArrayList::new;
         List<Integer> ageList = students.stream().map(Student::getAge).collect(Collectors.toList());
         System.out.println("所有学生的年龄:" + ageList);
         // 统计汇总信息

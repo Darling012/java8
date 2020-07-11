@@ -10,12 +10,12 @@ import java.util.concurrent.SubmissionPublisher;
  */
 
 /**
+ * 过滤 加工
  * Processor, 需要继承SubmissionPublisher并实现Processor接口
  * <p>
  * 输入源数据 integer, 过滤掉小于0的, 然后转换成字符串发布出去
  */
-class MyProcessor extends SubmissionPublisher<String>
-        implements Processor<Integer, String> {
+class MyProcessor extends SubmissionPublisher<String> implements Processor<Integer, String> {
 
     private Subscription subscription;
 

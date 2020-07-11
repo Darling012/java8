@@ -13,6 +13,4 @@
         <module>stream</module>
         <module>java9</module>
     </modules>
-
-
 </project>

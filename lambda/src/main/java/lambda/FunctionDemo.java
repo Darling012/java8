@@ -1,6 +1,12 @@
 package lambda;
 
-import java.util.function.*;
+import java.util.function.BiFunction;
+import java.util.function.BinaryOperator;
+import java.util.function.Consumer;
+import java.util.function.Function;
+import java.util.function.IntPredicate;
+import java.util.function.Supplier;
+import java.util.function.UnaryOperator;
 
 /**
  * @link https://cloud.tencent.com/developer/article/1333532
@@ -16,7 +22,6 @@ public class FunctionDemo {
         // test (条件测试) , and-or- negate(与或非) 方法
         IntPredicate predicate = i -> i > 0;
         System.out.println(predicate.test(-9));
-
 
 
         // 消费函数接口

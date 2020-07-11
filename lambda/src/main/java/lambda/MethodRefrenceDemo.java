@@ -69,7 +69,7 @@ public class MethodRefrenceDemo {
         dog.eat(3);
 
         // 方法引用
-//        Consumer<String> consumer = s -> System.out.println(s);
+        //        Consumer<String> consumer = s -> System.out.println(s);
         Consumer<String> consumer = System.out::println;
         consumer.accept("接受的数据");
 
@@ -79,17 +79,17 @@ public class MethodRefrenceDemo {
 
         Dog.bark(dog);
         // 非静态方法，使用对象实例的方法引用
-//        Function<Integer, Integer> function = dog::eat;
+        //        Function<Integer, Integer> function = dog::eat;
         // 输入 输出一样改为 一元函数
-//         UnaryOperator<Integer> function = dog::eat;
+        //         UnaryOperator<Integer> function = dog::eat;
         IntUnaryOperator function = dog::eat;
-//        function.apply(1);
-//         function.applyAsInt(1);
+        //        function.apply(1);
+        //         function.applyAsInt(1);
 
         // 使用类名来方法引用  非静态方法
         // 两个输入 一个输出
-//        BiFunction<Dog, Integer, Integer> eatFunction = Dog::eat;
-//        System.out.println("还剩下" + eatFunction.apply(dog, 2) + "斤");
+        //        BiFunction<Dog, Integer, Integer> eatFunction = Dog::eat;
+        //        System.out.println("还剩下" + eatFunction.apply(dog, 2) + "斤");
 
         //  dog置空，不影响下面的函数执行，因为java 参数是传值
         // 这里应该是形参依旧指向堆中数据 而 dog 指向变了

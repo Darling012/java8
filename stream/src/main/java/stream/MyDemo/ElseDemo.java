@@ -28,7 +28,7 @@ public class ElseDemo {
 
         IntStream intStream = IntStream.of(1, 2, 3);
         // todo
-//        IntStream byteStream = IntStream.
+        //        IntStream byteStream = IntStream.
         IntStream rangeStream = IntStream.range(1, 10);  // 不包含上限10
         IntStream rangeClosedStream = IntStream.rangeClosed(1, 10);  // 包含上限10
 

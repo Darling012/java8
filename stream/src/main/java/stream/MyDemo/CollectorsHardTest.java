@@ -17,7 +17,7 @@ public class CollectorsHardTest {
         //
         // MapUtils.verbosePrint(System.out, "性别和", mapSex);
 
-//       list.stream().collect(Collectors.groupingBy(User::getName,Collectors.groupingBy()));
+        //       list.stream().collect(Collectors.groupingBy(User::getName,Collectors.groupingBy()));
 
         // Map<String, List<User>> nameMap = list.stream().collect(Collectors.groupingBy(User::getName));
         // MapUtils.verbosePrint(System.out, "1", nameMap);

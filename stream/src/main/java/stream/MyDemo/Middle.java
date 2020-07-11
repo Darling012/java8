@@ -49,7 +49,7 @@ public class Middle {
 
         // 4）sorted排序
         // 一种是不传任何参数，叫自然排序，还有一种需要传Comparator 接口参数，叫做定制排序
-//        list.stream().sorted()
+        //        list.stream().sorted()
         list.stream().sorted(Comparator.comparingInt(User::getAge)).collect(Collectors.toList()).forEach(System.out::println);
 
 

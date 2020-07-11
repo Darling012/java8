@@ -49,7 +49,7 @@ public class CoreDemo {
         System.out.println(consumer.getClass());
     }
 
-//	public void lambda$0(String string) {
-//
-//	}
+    //	public void lambda$0(String string) {
+    //
+    //	}
 }

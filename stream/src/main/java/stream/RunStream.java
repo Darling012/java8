@@ -14,7 +14,6 @@ import java.util.stream.Stream;
  * 5. 并行环境下, 有状态的中间操作不一定能并行操作.
  * 6. parallel/ sequetial 这2个操作也是中间操作(也是返回stream)
  * 但是他们不创建流, 他们只修改 Head的并行标志
- *
  */
 public class RunStream {
 

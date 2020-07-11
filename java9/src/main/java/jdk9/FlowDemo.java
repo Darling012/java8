@@ -68,7 +68,7 @@ public class FlowDemo {
         // 这里忽略数据生产过程
         for (int i = 0; i < 1000; i++) {
             System.out.println("生成数据:" + i);
-            // submit是个block方法
+            // submit是个block方法  subscription缓冲池满了以后就不会再生产数据 消费一条生产一条
             publiser.submit(i);
             System.out.println("发布数据:" + i);
         }
