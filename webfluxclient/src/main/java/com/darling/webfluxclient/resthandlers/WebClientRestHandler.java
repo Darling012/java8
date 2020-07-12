@@ -43,8 +43,7 @@ public class WebClientRestHandler implements RestHandler {
         // 判断是否带了body
         if (methodInfo.getBody() != null) {
             // 发出请求
-            retrieve = request
-                    .body(methodInfo.getBody(), methodInfo.getBodyElementType())
+            retrieve = request.body(methodInfo.getBody(), methodInfo.getBodyElementType())
                     .retrieve();
         } else {
             retrieve = request.retrieve();

@@ -1,6 +1,6 @@
 package com.darling.webflux.util;
 
-import com.darling.webflux.advice.CheckException;
+import com.darling.webflux.exceptions.CheckException;
 
 import java.util.stream.Stream;
 

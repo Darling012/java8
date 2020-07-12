@@ -1,4 +1,4 @@
-package com.imooc.exceptions;
+package com.darling.fluxrouter.exceptions;
 
 import lombok.Data;
 

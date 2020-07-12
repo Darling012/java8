@@ -2,7 +2,7 @@ package com.darling.fluxrouter.handlers;
 
 import com.darling.fluxrouter.domain.User;
 import com.darling.fluxrouter.repository.UserRepository;
-import com.imooc.util.CheckUtil;
+import com.darling.fluxrouter.util.CheckUtil;
 import org.springframework.stereotype.Component;
 import org.springframework.web.reactive.function.server.ServerRequest;
 import org.springframework.web.reactive.function.server.ServerResponse;

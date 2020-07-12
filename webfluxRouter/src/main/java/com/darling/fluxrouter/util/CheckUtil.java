@@ -1,6 +1,7 @@
-package com.imooc.util;
+package com.darling.fluxrouter.util;
 
-import com.imooc.exceptions.CheckException;
+
+import com.darling.fluxrouter.exceptions.CheckException;
 
 import java.util.stream.Stream;
 
@@ -11,7 +12,7 @@ public class CheckUtil {
 	/**
 	 * 校验名字, 不成功抛出校验异常
 	 *
-	 * @param name
+	 * @param value
 	 */
 	public static void checkName(String value) {
 		Stream.of(INVALID_NAMES).filter(name -> name.equalsIgnoreCase(value))
