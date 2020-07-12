@@ -7,8 +7,6 @@ import java.util.*;
 import static java.util.function.Function.identity;
 import static java.util.stream.Collectors.*;
 
-// import static java.util.function.Function.identity;
-
 /**
  * @program: java8
  * @description: Collectors类操作

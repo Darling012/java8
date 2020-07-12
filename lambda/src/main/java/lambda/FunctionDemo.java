@@ -47,7 +47,7 @@ public class FunctionDemo {
         System.out.println(unaryOperator.apply("unaryOperator"));
 
         // BiFunction<T,U,R> 2个输入函数
-        BiFunction<Integer, Integer, Integer> biFunction = (i, j) -> i + j;
+        BiFunction<Integer, Integer, String> biFunction = (i, j) -> "" + i + j;
         System.out.println(biFunction.apply(1, 2));
 
         // BinaryOperator<T,T> 两元函数 （输出输入类型相同）
