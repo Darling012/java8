@@ -25,6 +25,7 @@ public class TestController {
     @GetMapping("/2")
     private Mono<String> get2() {
         log.info("get2 start");
+        // 前台页面还是五秒收到结果
         Mono<String> result = Mono.fromSupplier(() -> createStr());
         log.info("get2 end.");
         return result;

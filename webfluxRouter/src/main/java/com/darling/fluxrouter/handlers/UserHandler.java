@@ -40,8 +40,9 @@ public class UserHandler {
 	 */
 	public Mono<ServerResponse> createUser(ServerRequest request) {
 		// 2.0.0 是可以工作, 但是2.0.1 下面这个模式是会报异常
+		// Mono<User> user = request.bodyToMono(User.class).block();
 		Mono<User> user = request.bodyToMono(User.class);
-
+     // Mono flux 是流是发布者 任何时候不能在自己的代码里掉订阅，不能消费  要交给springboot框架消费
 		return user.flatMap(u -> {
 			// 校验代码需要放在这里
 			CheckUtil.checkName(u.getName());
