@@ -5,6 +5,7 @@ import java.util.concurrent.TimeUnit;
 import java.util.stream.Stream;
 
 /**
+ * 3.7
  * 验证stream运行机制
  * 1. 所有操作是链式调用, 一个元素只迭代一次
  * 2. 每一个中间操作返回一个新的流. 流里面有一个属性sourceStage
@@ -23,14 +24,14 @@ public class RunStream {
         Stream<Integer> stream = Stream.generate(() -> random.nextInt())
                 // 产生500个 ( 无限流需要短路操作. )
                 .limit(500)
-                // 第1个无状态操作
+                // 第1个无状态操作 一个参数
                 .peek(s -> print("peek: " + s))
                 // 第2个无状态操作
                 .filter(s -> {
                     print("filter: " + s);
                     return s > 1000000;
                 })
-                // 有状态操作
+                // 有状态操作 两个入参
                 .sorted((i1, i2) -> {
                     print("排序: " + i1 + ", " + i2);
                     return i1.compareTo(i2);

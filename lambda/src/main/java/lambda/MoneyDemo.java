@@ -3,6 +3,9 @@ package lambda;
 import java.text.DecimalFormat;
 import java.util.function.Function;
 
+/**
+ * 2.9
+ */
 class MyMoney {
     private final int money;
 

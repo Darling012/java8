@@ -37,7 +37,7 @@ public class StreamDemo4 {
                 .reduce((s1, s2) -> s1 + "|" + s2);
         System.out.println(letters.orElse(""));
 
-        // 带初始化值的reduce
+        // 带初始化值的reduce 不用再空判断
         System.out.println();
         String reduce = Stream.of(str.split(" ")).reduce("",
                 (s1, s2) -> s1 + "|" + s2);

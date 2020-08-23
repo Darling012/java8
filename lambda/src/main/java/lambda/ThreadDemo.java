@@ -1,5 +1,8 @@
 package lambda;
 
+/**
+ * 2.4
+ */
 public class ThreadDemo {
 
     public static void main(String[] args) {

@@ -9,8 +9,9 @@ import java.util.function.Supplier;
 import java.util.function.UnaryOperator;
 
 /**
- * @link https://cloud.tencent.com/developer/article/1333532
- * @link https://segmentfault.com/a/1190000016596774
+ * 2.10
+ * @see <a href="https://cloud.tencent.com/developer/article/1333532</a>
+ * @see <a href="https://segmentfault.com/a/1190000016596774</a>
  */
 public class FunctionDemo {
 
@@ -20,6 +21,7 @@ public class FunctionDemo {
         // 断言 也就是条件测试器 接收条件,进行测试
         // 接口定义了一个名叫test的抽象方法，它接受泛型T对象，并返回一个boolean。
         // test (条件测试) , and-or- negate(与或非) 方法
+        // Predicate predicate1 = o -> o==null;
         IntPredicate predicate = i -> i > 0;
         System.out.println(predicate.test(-9));
 

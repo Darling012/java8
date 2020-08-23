@@ -8,6 +8,9 @@ import java.util.Random;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
+/**
+ * 3.2 流的创建
+ */
 public class StreamDemo2 {
 
     public static void main(String[] args) {

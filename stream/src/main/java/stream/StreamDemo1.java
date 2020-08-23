@@ -6,6 +6,7 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 /**
+ * 3.1
  * 1 创建stream：从数据源(如集合、数组等)获取一个流。
  * 2 中间操作：对数据一连串处理，每次处理后结果仍为一个流。
  * 3 终止操作：执行中间操作链，并产生最终结果。

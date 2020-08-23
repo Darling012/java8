@@ -1,5 +1,8 @@
 package lambda;
 
+/**
+ * 2.13
+ */
 @FunctionalInterface
 interface IMath {
     int add(int x, int y);
