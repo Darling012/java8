@@ -59,9 +59,27 @@ import java.util.stream.Stream;
 public class OptionalDemo {
     public static void main(String[] args) {
 
-        //        static <T> Optional<T> empty()
-        //         返回空的 Optional 实例。
+        //1 创建 Optional 对象
+        // 1.1可以使用静态方法 empty () 创建一个空的 Optional 对象
+        Optional<String> empty = Optional.empty();
+        System.out.println(empty); // 输出：Optional.empty
+
+        // 1.2可以使用静态方法 of () 创建一个非空的 Optional 对象
+        Optional<String> opt = Optional.of("沉默王二");
+        System.out.println(opt); // 输出：Optional[沉默王二]
+        // of () 方法的参数必须是非空的，也就是说不能为 null，否则仍然会抛出 NullPointerException。
+        String name = null;
+        // Optional<String> optnull = Optional.of(name);
+        // 1.3可以使用静态方法 ofNullable () 创建一个即可空又可非空的 Optional 对象
+        // ofNullable() 方法内部有一个三元表达式，如果为参数为 null，则返回私有常量 EMPTY；否则使用 new 关键字创建了一个新的 Optional 对象——不会再抛出 NPE 异常了。
+        String name2 = null;
+        Optional<String> optOrNull = Optional.ofNullable(name2);
+        System.out.println(optOrNull); // 输出：Optional.empty
+
+
+
         Optional optional = Optional.empty();
+        //  static <T> Optional<T> empty()
 
         //  Optional<T> filter(Predicate<? super <T> predicate)
         //如果值存在，并且这个值匹配给定的 predicate，返回一个Optional用以描述这个值，否则返回一个空的Optional。
