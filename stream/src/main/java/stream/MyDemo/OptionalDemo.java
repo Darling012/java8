@@ -77,7 +77,6 @@ public class OptionalDemo {
         System.out.println(optOrNull); // 输出：Optional.empty
 
 
-
         Optional optional = Optional.empty();
         //  static <T> Optional<T> empty()
 
