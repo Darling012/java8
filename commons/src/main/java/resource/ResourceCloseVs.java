@@ -1,6 +1,6 @@
 package resource;
 
-import com.imooc.zhangxiaoxi.lambda.file.FileConsumer;
+import lambda.file.FileConsumer;
 import org.junit.Test;
 
 import java.io.BufferedReader;

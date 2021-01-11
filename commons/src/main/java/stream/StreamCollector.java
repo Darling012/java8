@@ -1,8 +1,8 @@
 package stream;
 
 import com.alibaba.fastjson.JSON;
-import com.imooc.zhangxiaoxi.lambda.cart.CartService;
-import com.imooc.zhangxiaoxi.lambda.cart.Sku;
+import lambda.cart.CartService;
+import lambda.cart.Sku;
 import org.junit.Test;
 
 import java.util.List;
