@@ -12,6 +12,7 @@
         <module>lambda</module>
         <module>stream</module>
         <module>java9</module>
+        <module>commons</module>
     </modules>
     <dependencyManagement>
         <dependencies>
