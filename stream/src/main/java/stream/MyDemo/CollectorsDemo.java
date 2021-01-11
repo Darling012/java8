@@ -136,8 +136,8 @@ public class CollectorsDemo {
     @DisplayName("BigDecimal求和与求平均数")
     @Test
     public void bigDecimalMathTest() {
-        List<BigDecimal> list = Arrays.asList(new BigDecimal("1.1"),new BigDecimal("1.2"));
-        System.out.println(average(list,RoundingMode.HALF_DOWN));
+        List<BigDecimal> list = Arrays.asList(new BigDecimal("1.1"), new BigDecimal("1.2"));
+        System.out.println(average(list, RoundingMode.HALF_DOWN));
     }
 
     @DisplayName("根据对象某个属性去重")
@@ -146,16 +146,18 @@ public class CollectorsDemo {
         list.stream().filter(distinctByKey(b -> b.getName()))
             .forEach(b -> System.out.println(b.getName()));
     }
- @DisplayName("字符串拼接")
+
+    @DisplayName("字符串拼接")
     @Test
     public void stringTest() {
-      String names = list.stream().map(User::getName).collect(joining());
+        String names = list.stream().map(User::getName).collect(joining());
         String namess = list.stream().map(User::getName).collect(joining(","));
         System.out.println(names);
     }
-     @DisplayName("分组操作")
-     @Test
-    public  void groupingByTest() {
+
+    @DisplayName("分组操作")
+    @Test
+    public void groupingByTest() {
         // 分组
         // groupingBy和partitioningBy不同的一点是，它的输入是一个Function，这样返回结果的Map中的Key就不再是boolean型，而是符合条件的分组值
         // 1）根据用户所在城市进行分组
