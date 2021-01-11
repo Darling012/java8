@@ -81,12 +81,22 @@ public class DateTest {
 
     @Test
     public void testInstant() {
+        // 时间戳
         Instant instant = Instant.now();
         //     获取秒数
         long currentSecond = instant.getEpochSecond();
         //     获取毫秒数
         long currentMilli = instant.toEpochMilli();
         System.currentTimeMillis();
+
+        LocalDateTime dateTime = LocalDateTime.of(2020,9,2,10,47,00);
+        System.out.println(dateTime);
+        System.out.println(dateTime.toEpochSecond(ZoneOffset.of("+8")));
+
+
+        DateTimeFormatter ftf = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        String str = ftf.format(LocalDateTime.ofInstant(Instant.ofEpochMilli(1599014820),ZoneId.of("+8")));
+        System.out.println(str);
     }
 
 
@@ -265,12 +275,6 @@ public class DateTest {
         System.out.println("Date and Time with timezone offset in Java : " + date);
     }
 
-    @Test
-    public void getTimestamp() {
-        // 获取时间戳
-        Instant timestamp = Instant.now();
-        System.out.println("What is value of this instant " + timestamp);
-    }
 
     @Test
     public void formatDate() {

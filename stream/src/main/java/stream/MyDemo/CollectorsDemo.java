@@ -2,7 +2,13 @@ package stream.MyDemo;
 
 import org.apache.commons.collections4.MapUtils;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.*;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.function.Function;
+import java.util.function.Predicate;
+import java.util.stream.Collectors;
 
 import static java.util.function.Function.identity;
 import static java.util.stream.Collectors.*;
@@ -35,8 +41,10 @@ public class CollectorsDemo {
         Map<String, User> userMapId = list.stream().collect(toMap(User::getId, identity()));
         MapUtils.verbosePrint(System.out, "收集到MapId", userMapId);
         Map<String, User> userMapName = list.stream().collect(toMap(User::getName, identity(), (t1, t2) -> t1));
-        Map<String, User> userLinkedHashMapName = list.stream().collect(toMap(User::getName, identity(), (t1, t2) -> t1, LinkedHashMap::new));
-        Map<String, User> userConcurrentMapMapName = list.stream().collect(toConcurrentMap(User::getName, identity(), (t1, t2) -> t1));
+        Map<String, User> userLinkedHashMapName = list.stream().collect(
+                toMap(User::getName, identity(), (t1, t2) -> t1, LinkedHashMap::new));
+        Map<String, User> userConcurrentMapMapName = list.stream().collect(
+                toConcurrentMap(User::getName, identity(), (t1, t2) -> t1));
 
         MapUtils.verbosePrint(System.out, "收集到MapName", userMapName);
         // 3 将流转换成其他集合
@@ -109,36 +117,43 @@ public class CollectorsDemo {
         Map<String, Integer> ageSumMap = list.stream().collect(groupingBy(User::getAddress, summingInt(User::getAge)));
         MapUtils.verbosePrint(System.out, "城市分组后每个组年龄之和", ageSumMap);
         // 按照城市进行分组,再找出年龄最大的人
-        Map<String, Optional<User>> maxAgeMap = list.stream().collect(groupingBy(User::getAddress, maxBy(Comparator.comparing(User::getAge))));
+        Map<String, Optional<User>> maxAgeMap = list.stream().collect(
+                groupingBy(User::getAddress, maxBy(Comparator.comparing(User::getAge))));
         MapUtils.verbosePrint(System.out, "城市分组后每个组年龄最大的", maxAgeMap);
         // 按照城市进行分组,再找出名字最长的人
-        Map<String, Optional<String>> maxAgeMap1 = list.stream().collect(groupingBy(User::getAddress, mapping(User::getName, maxBy(Comparator.comparing(String::length)))));
+        Map<String, Optional<String>> maxAgeMap1 = list.stream().collect(
+                groupingBy(User::getAddress, mapping(User::getName, maxBy(Comparator.comparing(String::length)))));
         MapUtils.verbosePrint(System.out, "城市分组后每个组最长的名字", maxAgeMap1);
         // 按照城市进行分组,再找出年龄统计信息
-        Map<String, IntSummaryStatistics> statisticsMap = list.stream().collect(groupingBy(User::getAddress, summarizingInt(User::getAge)));
+        Map<String, IntSummaryStatistics> statisticsMap = list.stream().collect(
+                groupingBy(User::getAddress, summarizingInt(User::getAge)));
         MapUtils.verbosePrint(System.out, "城市分组后每个组年龄信息", statisticsMap);
         // 按照城市进行分组,再把每个人名字拼接起来
-        Map<String, String> sumName1 = list.stream().collect(groupingBy(User::getAddress, reducing("", User::getName, (s, t) -> s.length() == 0 ? t : s + ", " + t)));
+        Map<String, String> sumName1 = list.stream().collect(groupingBy(User::getAddress, reducing("", User::getName,
+                                                                                                   (s, t) -> s
+                                                                                                           .length() == 0 ? t : s + ", " + t)));
         MapUtils.verbosePrint(System.out, "城市分组后每个人名拼接1", sumName1);
-        Map<String, String> sumName2 = list.stream().collect(groupingBy(User::getAddress, mapping(User::getName, joining("-"))));
+        Map<String, String> sumName2 = list.stream()
+                                           .collect(groupingBy(User::getAddress, mapping(User::getName, joining("-"))));
         MapUtils.verbosePrint(System.out, "城市分组后每个人名拼接2", sumName2);
         // 按城市年龄分组 统计
-        Map<String, Long> nameAddre = list.stream().collect(groupingBy(user -> user.getAge() + "-" + user.getAddress(), counting()));
+        Map<String, Long> nameAddre = list.stream().collect(
+                groupingBy(user -> user.getAge() + "-" + user.getAddress(), counting()));
 
         // 2）二级分组，先根据城市分组再根据性别分组
         Map<String, Map<Integer, List<User>>> group = list.stream().collect(
                 groupingBy(User::getAddress, // 一级分组，按所在地区
-                        groupingBy(User::getSex))); // 二级分组，按性别
+                           groupingBy(User::getSex))); // 二级分组，按性别
         MapUtils.verbosePrint(System.out, "二级分组", group);
 
         // 3）按城市分组并统计人数
         Map<String, Long> cityCountMap = list.stream()
-                .collect(groupingBy(User::getAddress, counting()));
+                                             .collect(groupingBy(User::getAddress, counting()));
         MapUtils.verbosePrint(System.out, "城市人数", cityCountMap);
 
         // 4）先进行过滤再分组
         Map<String, Long> map = list.stream().filter(user -> user.getAge() >= 60)
-                .collect(groupingBy(User::getAddress, counting()));
+                                    .collect(groupingBy(User::getAddress, counting()));
         MapUtils.verbosePrint(System.out, "30岁以上城市人数", map);
 
 
@@ -147,8 +162,50 @@ public class CollectorsDemo {
         // 会根据条件对流进行分区操作，返回一个Map，Key是boolean型，Value是对应分区的List，也就是说结果只有符合条件和不符合条件两种
         //根据年龄是否小于等于30来分区
         Map<Boolean, List<User>> part = list.stream()
-                .collect(partitioningBy(user -> user.getAge() <= 30));
+                                            .collect(partitioningBy(user -> user.getAge() <= 30));
         MapUtils.verbosePrint(System.out, "30岁分组", part);
+        // 条件分组 List 按年龄分成三组:0<age<=20, 20<age<=40, 40<age.
+        Map<String, List<User>> tripleUsers = list.stream()
+                                                  .collect(Collectors.groupingBy(user -> {
+                                                      String key;
+                                                      if (user.getAge() <= 20) {
+                                                          key = "less20";
+                                                      } else if (user.getAge() <= 40) {
+                                                          key = "less40";
+                                                      } else {
+                                                          key = "more40";
+                                                      }
+                                                      return key;
+                                                  }, Collectors.toList()));
+
+        System.out.println(tripleUsers);
+        //{more40=[Kate, Lio], less40=[Tom, Leo], less20=[Jim, John]}
 
     }
+
+    /**
+     * BigDecimal求和与求平均数
+     *
+     * @param bigDecimals
+     * @param roundingMode
+     * @return
+     */
+    public BigDecimal average(List<BigDecimal> bigDecimals, RoundingMode roundingMode) {
+        BigDecimal sum = bigDecimals.stream()
+                                    .map(Objects::requireNonNull)
+                                    .reduce(BigDecimal.ZERO, BigDecimal::add);
+        return sum.divide(new BigDecimal(bigDecimals.size()), roundingMode);
+    }
+
+    /**
+     * 条件去重
+     */
+    public static <T> Predicate<T> distinctByKey(Function<? super T, Object> keyExtractor) {
+        Map<Object, Boolean> seen = new ConcurrentHashMap<>();
+        // putIfAbsent方法主要是在向ConcurrentHashMap中添加键—值对的时候，它会先判断该键值对是否已经存在。
+        // （1）如果是新的记录，那么会向map中添加该键值对，并返回null。
+        // （2）如果已经存在，那么不会覆盖已有的值，直接返回已经存在的值。
+        return object -> seen.putIfAbsent(keyExtractor.apply(object), Boolean.TRUE) == null;
+    }
+
 }
