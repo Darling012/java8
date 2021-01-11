@@ -198,7 +198,8 @@ public class CollectorsDemo {
     }
 
     /**
-     * 条件去重
+     * distinct（）基于hashCode（）和equals（）工作，不提供按照属性对对象列表进行去重的直接实现。
+     * 对对象列表进行条件去重
      */
     public static <T> Predicate<T> distinctByKey(Function<? super T, Object> keyExtractor) {
         Map<Object, Boolean> seen = new ConcurrentHashMap<>();
