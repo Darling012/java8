@@ -73,6 +73,8 @@
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
             <version>4.13.1</version>
+<!--    test 只能在maven test 文件夹下引到        -->
+<!--            <scope>test</scope>-->
         </dependency>
 
         <!--    copier -->

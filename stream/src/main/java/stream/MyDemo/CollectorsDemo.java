@@ -1,6 +1,10 @@
 package stream.MyDemo;
 
 import org.apache.commons.collections4.MapUtils;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
+import stream.myCollector.MySetCollector;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
@@ -14,28 +18,41 @@ import static java.util.function.Function.identity;
 import static java.util.stream.Collectors.*;
 
 /**
+ * 收集 collect（将流转换为其他形式。接收一个Collector接口得实现，用于给其他Stream中元素做汇总的方法）
+ * Collector接口中方法得实现决定了如何对流执行收集操作（如收集到List，Set，Map）。
+ * Collectors实用类提供了很多静态方法，可以方便地创建常见得收集器实例。
+ *
  * @program: java8
  * @description: Collectors类操作
  * @author: Darling
  * @create: 2019-08-10 16:59
  **/
 public class CollectorsDemo {
-    public static void main(String[] args) {
-        //1.构建我们的list
-        List<User> list = Data.getData();
+    List<User> list;
 
-        // 3 收集 collect（将流转换为其他形式。接收一个Collector接口得实现，用于给其他Stream中元素做汇总的方法）
-        // Collector接口中方法得实现决定了如何对流执行收集操作（如收集到List，Set，Map）。
-        // Collectors实用类提供了很多静态方法，可以方便地创建常见得收集器实例。
+    @BeforeEach
+    void init() {
+        list = Data.getData();
+    }
 
-        // 1 Collectors.toList（） 将流转换成List
+    @Test
+    @DisplayName("1 Collectors.toList（）将流转换成List")
+    public void toListTest() {
         List<String> userList = list.stream().map(User::getName).collect(toList());
         System.out.println(userList);
+    }
 
-        // 2 将流转换成HashSet
+    @Test
+    @DisplayName("2 Collectors.toSet（）将流转换成HashSet")
+    public void toSetTest() {
         // hashSet会去重复
         Set<String> userSet = list.stream().map(User::getName).collect(toSet());
         System.out.println(userSet);
+    }
+
+    @Test
+    @DisplayName("3 Collectors.toMap（）将流转换成Map")
+    public void toMapTest() {
         // 转换为map
         // Map<String,User> userMap = list.stream().collect(toMap(User::getId,user -> user));
         Map<String, User> userMapId = list.stream().collect(toMap(User::getId, identity()));
@@ -47,18 +64,36 @@ public class CollectorsDemo {
                 toConcurrentMap(User::getName, identity(), (t1, t2) -> t1));
 
         MapUtils.verbosePrint(System.out, "收集到MapName", userMapName);
-        // 3 将流转换成其他集合
+    }
+
+    @Test
+    @DisplayName("4 将流转换成其他集合")
+    public void toOthersTest() {
         Set<String> userSet1 = list.stream().map(User::getName).collect(toCollection(LinkedHashSet::new));
         System.out.println(userSet1);
+    }
 
-        // 4 Collectors.counting() 元素个数
+    @Test
+    @DisplayName(" 5 将流转换为其他形式 ， 接受一个collectors接口的实现，用于给Stream中元素做汇总的方法")
+    public void toMyCollectorTest() {
+        List<String> list = Arrays.asList("hello", "world", "welcome", "hello");
+        Set<String> collect = list.stream().collect(new MySetCollector<String>());
+        System.out.println(collect);
+    }
+
+    @Test
+    @DisplayName("Collectors.counting() 元素个数")
+    public void countingTest() {
         Long collectCount = list.stream().map(User::getAge).distinct().collect(counting());
         Long collectCount1 = list.stream().map(User::getAge).distinct().count();
         //        Long collectCount1 = list.stream().count();
         //        Long collectCount2 = (long) list.size();
+    }
 
-        // 5 将流转换为其他形式 ， 接受一个collectors接口的实现，用于给Stream中元素做汇总的方法
 
+    @Test
+    @DisplayName("个数、总和、最大值、最小值")
+    public void mathTest() {
         // 1 对元素进行汇总方法
         // 一次性得到元素的个数、总和、最大值、最小值
         DoubleSummaryStatistics collect = list.stream().collect(summarizingDouble(User::getAge));
@@ -70,7 +105,7 @@ public class CollectorsDemo {
         System.out.println("最小值为" + collect.getMin());
         System.out.println("sum值为" + collect.getSum());
 
-        // 3）求年龄总和是多少
+        // 求年龄总和是多少
         int totalAge = list.stream().collect(summingInt(User::getAge));
         Long totalAgeLong = list.stream().collect(summingLong(User::getAge));
         Double totalAged = list.stream().collect(summingDouble(User::getAge));
@@ -81,13 +116,6 @@ public class CollectorsDemo {
         System.out.println(total.orElse(-1));
         // 经常会用BigDecimal来记录金钱，假设想得到BigDecimal的总和：
         //        BigDecimal sum = list.stream() .map(User::getAge).reduce(BigDecimal.ZERO,BigDecimal::add);
-
-
-        // 元素转换为其他形式
-        // 字符串拼接
-        String names = list.stream().map(User::getName).collect(joining());
-        String namess = list.stream().map(User::getName).collect(joining(","));
-        System.out.println(names);
 
         // 平均值
         Double avgAgeInt = list.stream().collect(averagingInt(User::getAge));
@@ -103,7 +131,31 @@ public class CollectorsDemo {
         // 数量
         Long count = list.stream().collect(counting());
         System.out.println(count);
+    }
 
+    @DisplayName("BigDecimal求和与求平均数")
+    @Test
+    public void bigDecimalMathTest() {
+        List<BigDecimal> list = Arrays.asList(new BigDecimal("1.1"),new BigDecimal("1.2"));
+        System.out.println(average(list,RoundingMode.HALF_DOWN));
+    }
+
+    @DisplayName("根据对象某个属性去重")
+    @Test
+    public void distinctByKeyTest() {
+        list.stream().filter(distinctByKey(b -> b.getName()))
+            .forEach(b -> System.out.println(b.getName()));
+    }
+ @DisplayName("字符串拼接")
+    @Test
+    public void stringTest() {
+      String names = list.stream().map(User::getName).collect(joining());
+        String namess = list.stream().map(User::getName).collect(joining(","));
+        System.out.println(names);
+    }
+     @DisplayName("分组操作")
+     @Test
+    public  void groupingByTest() {
         // 分组
         // groupingBy和partitioningBy不同的一点是，它的输入是一个Function，这样返回结果的Map中的Key就不再是boolean型，而是符合条件的分组值
         // 1）根据用户所在城市进行分组
@@ -208,5 +260,4 @@ public class CollectorsDemo {
         // （2）如果已经存在，那么不会覆盖已有的值，直接返回已经存在的值。
         return object -> seen.putIfAbsent(keyExtractor.apply(object), Boolean.TRUE) == null;
     }
-
 }
