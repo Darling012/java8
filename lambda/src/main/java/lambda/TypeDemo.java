@@ -32,6 +32,10 @@ public class TypeDemo {
 
         TypeDemo demo = new TypeDemo();
         // 当有二义性的时候，使用强转对应的接口解决
+        // 在涉及重载的上下文里，将匿名类转换
+        // Lambda表达式可能导致最终的代码更加晦
+        // 涩。实际上，匿名类的类型是在初始化时确定的，
+        // Lambda的类型取决于它的上下
         demo.test((IMath2) (x, y) -> x + y);
     }
 
