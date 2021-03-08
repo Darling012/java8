@@ -1,4 +1,4 @@
-package stream.MyDemo;
+package opt;
 
 import java.util.ArrayList;
 import java.util.Optional;
@@ -20,8 +20,6 @@ import java.util.stream.Stream;
  * 3	Optional<T> filter(Predicate<? super <T> predicate)
  * 如果值存在，并且这个值匹配给定的 predicate，返回一个Optional用以描述这个值，否则返回一个空的Optional。
  * <p>
- * 4	<U> Optional<U> flatMap(Function<? super T,Optional<U>> mapper)
- * 如果值存在，返回基于Optional包含的映射方法的值，否则返回一个空的Optional
  * <p>
  * 5	T get()
  * 如果在这个Optional中包含这个值，返回值，否则抛出异常：NoSuchElementException
@@ -38,6 +36,8 @@ import java.util.stream.Stream;
  * 9	<U>Optional<U> map(Function<? super T,? extends U> mapper)
  * 如果有值，则对其执行调用映射函数得到返回值。如果返回值不为 null，则创建包含映射返回值的Optional作为map方法返回值，否则返回空Optional。
  * <p>
+ * 4	<U> Optional<U> flatMap(Function<? super T,Optional<U>> mapper)
+ *  * 如果值存在，返回基于Optional包含的映射方法的值，否则返回一个空的Optional
  * 10	static <T> Optional<T> of(T value)
  * 返回一个指定非null值的Optional。
  * <p>
@@ -101,5 +101,22 @@ public class OptionalDemo {
         maxStrOpt.orElse(""); // 添加默认值""
         maxStrOpt.orElseGet(() -> System.getProperty("user.dir")); // 通过表达式返回结果
         maxStrOpt.orElseThrow(RuntimeException::new); // 抛出异常
+
+
+        Optional<String> optt=Optional.of("沉默王二");
+        System.out.println(optt.isPresent());
+        // 输出：false
+         Optional<String> optOrNulll = Optional.ofNullable(null);
+         System.out.println(optOrNulll.isPresent());// 输出：true
+
+
+
+        Optional<String> opts = Optional.of("沉默王二");
+        // 输出：false
+        System.out.println(opts.isPresent());
+         // 输出：true
+         Optional<String> optOrNulls = Optional.ofNullable(null);
+         System.out.println(optOrNulls.isPresent());
+
     }
 }
