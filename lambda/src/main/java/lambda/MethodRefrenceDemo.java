@@ -61,7 +61,7 @@ class Dog {
 }
 
 /**
- * objectName::instanceMethod
+ * objectName::instanceMethod  思想就是你在引用一个对象的方法，而这个对象本身的一个参数
  * ClassName::staticMethod
  * ClassName::instanceMethod
  */
