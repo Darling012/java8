@@ -261,9 +261,9 @@ public class DateTest {
         System.out.println(now.format(dtf));
         LocalDateTime future = now.minusMinutes(1);
         System.out.println(future.format(dtf));
-        Integer startNum = Math.toIntExact(Duration.between(future, now).toSeconds());
+        // Integer startNum = Math.toIntExact(Duration.between(future, now).toSeconds());
         System.out.println(Math.toIntExact(Duration.between(future, now).toMillis() / 1000));
-        System.out.println(startNum);
+        // System.out.println(startNum);
     }
 
     @Test
