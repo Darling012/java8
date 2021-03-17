@@ -15,7 +15,7 @@ public class LambdaTest {
         return mathOperation.operation(a, b);
     }
 
-    public static void main(String args[]) {
+    public static void main(String[] args) {
         LambdaTest tester = new LambdaTest();
 
         // 类型声明

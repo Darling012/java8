@@ -14,7 +14,7 @@ import java.util.function.BiFunction;
 /**
  * @program: java8
  * @version:
- * @description: map 新特性
+ * @description: map 新特性  https://mp.weixin.qq.com/s/SzGnIXeVHTzfE6Q36sRD3g
  * @author: ling
  * @create: 2021-03-17 09:22
  **/
