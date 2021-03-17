@@ -32,7 +32,6 @@ public class FunctionDemo {
         // 你如果需要访问类型T的对象，并对其执行某些操作，就可以使用这个接口
         Consumer<String> consumer = s -> System.out.println(s);
         consumer.accept("输入的数据");
-
         // Function<T,R> 输入T输出R
         // 函数 有输入有输出 数据转换功能
         // 接口定义了一个叫作apply的方法，它接受一个泛型T的对象，并返回一个泛型R的对象。
