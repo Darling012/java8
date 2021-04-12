@@ -31,16 +31,14 @@ public class StreamOperator {
     @Test
     public void filterTest() {
         list.stream()
-
-                // filter
-                .filter(sku ->
-                        SkuCategoryEnum.BOOKS
-                                .equals(sku.getSkuCategory()))
-
-                .forEach(item ->
-                        System.out.println(
-                                JSON.toJSONString(
-                                        item, true)));
+            // filter
+            .filter(sku ->
+                            SkuCategoryEnum.BOOKS
+                                    .equals(sku.getSkuCategory()))
+            .forEach(item ->
+                             System.out.println(
+                                     JSON.toJSONString(
+                                             item, true)));
     }
 
     /**
@@ -50,13 +48,13 @@ public class StreamOperator {
     public void mapTest() {
         list.stream()
 
-                // map
-                .map(sku -> sku.getSkuName())
+            // map
+            .map(sku -> sku.getSkuName())
 
-                .forEach(item ->
-                        System.out.println(
-                                JSON.toJSONString(
-                                        item, true)));
+            .forEach(item ->
+                             System.out.println(
+                                     JSON.toJSONString(
+                                             item, true)));
     }
 
     /**
@@ -65,15 +63,14 @@ public class StreamOperator {
     @Test
     public void flatMapTest() {
         list.stream()
-
-                // flatMap
-                .flatMap(sku -> Arrays.stream(
-                        sku.getSkuName().split("")))
-
-                .forEach(item ->
-                        System.out.println(
-                                JSON.toJSONString(
-                                        item, true)));
+            // flatMap
+            .flatMap(sku -> Arrays.stream(
+                    sku.getSkuName()
+                       .split("")))
+            .forEach(item ->
+                             System.out.println(
+                                     JSON.toJSONString(
+                                             item, true)));
     }
 
     /**
@@ -82,14 +79,12 @@ public class StreamOperator {
     @Test
     public void peek() {
         list.stream()
-
-                // peek
-                .peek(sku -> System.out.println(sku.getSkuName()))
-
-                .forEach(item ->
-                        System.out.println(
-                                JSON.toJSONString(
-                                        item, true)));
+            // peek
+            .peek(sku -> System.out.println(sku.getSkuName()))
+            .forEach(item ->
+                             System.out.println(
+                                     JSON.toJSONString(
+                                             item, true)));
     }
 
     /**
@@ -98,16 +93,12 @@ public class StreamOperator {
     @Test
     public void sortTest() {
         list.stream()
-
-                .peek(sku -> System.out.println(sku.getSkuName()))
-
-                //sort
-                .sorted(Comparator.comparing(Sku::getTotalPrice))
-
-                .forEach(item ->
-                        System.out.println(
-                                JSON.toJSONString(
-                                        item, true)));
+            .peek(sku -> System.out.println(sku.getSkuName()))
+            .sorted(Comparator.comparing(Sku::getTotalPrice))
+            .forEach(item ->
+                             System.out.println(
+                                     JSON.toJSONString(
+                                             item, true)));
     }
 
     /**
@@ -116,15 +107,13 @@ public class StreamOperator {
     @Test
     public void distinctTest() {
         list.stream()
-                .map(sku -> sku.getSkuCategory())
-
-                // distinct
-                .distinct()
-
-                .forEach(item ->
-                        System.out.println(
-                                JSON.toJSONString(
-                                        item, true)));
+            .map(sku -> sku.getSkuCategory())
+            // distinct
+            .distinct()
+            .forEach(item ->
+                             System.out.println(
+                                     JSON.toJSONString(
+                                             item, true)));
 
 
     }
@@ -135,16 +124,13 @@ public class StreamOperator {
     @Test
     public void skipTest() {
         list.stream()
-
-                .sorted(Comparator.comparing(Sku::getTotalPrice))
-
-                // skip
-                .skip(3)
-
-                .forEach(item ->
-                        System.out.println(
-                                JSON.toJSONString(
-                                        item, true)));
+            .sorted(Comparator.comparing(Sku::getTotalPrice))
+            // skip
+            .skip(3)
+            .forEach(item ->
+                             System.out.println(
+                                     JSON.toJSONString(
+                                             item, true)));
     }
 
     /**
@@ -153,17 +139,14 @@ public class StreamOperator {
     @Test
     public void limitTest() {
         list.stream()
-                .sorted(Comparator.comparing(Sku::getTotalPrice))
-
-                .skip(2 * 3)
-
-                // limit
-                .limit(3)
-
-                .forEach(item ->
-                        System.out.println(
-                                JSON.toJSONString(
-                                        item, true)));
+            .sorted(Comparator.comparing(Sku::getTotalPrice))
+            .skip(2 * 3)
+            // limit
+            .limit(3)
+            .forEach(item ->
+                             System.out.println(
+                                     JSON.toJSONString(
+                                             item, true)));
     }
 
     /**
@@ -172,11 +155,9 @@ public class StreamOperator {
     @Test
     public void allMatchTest() {
         boolean match = list.stream()
-
-                .peek(sku -> System.out.println(sku.getSkuName()))
-
-                // allMatch
-                .allMatch(sku -> sku.getTotalPrice() > 100);
+                            .peek(sku -> System.out.println(sku.getSkuName()))
+                            // allMatch
+                            .allMatch(sku -> sku.getTotalPrice() > 100);
 
         System.out.println(match);
     }
@@ -187,12 +168,9 @@ public class StreamOperator {
     @Test
     public void anyMatchTest() {
         boolean match = list.stream()
-
-                .peek(sku -> System.out.println(sku.getSkuName()))
-
-                // anyMatch
-                .anyMatch(sku -> sku.getTotalPrice() > 100);
-
+                            .peek(sku -> System.out.println(sku.getSkuName()))
+                            // anyMatch
+                            .anyMatch(sku -> sku.getTotalPrice() > 100);
         System.out.println(match);
     }
 
@@ -202,12 +180,9 @@ public class StreamOperator {
     @Test
     public void noneMatchTest() {
         boolean match = list.stream()
-
-                .peek(sku -> System.out.println(sku.getSkuName()))
-
-                // noneMatch
-                .noneMatch(sku -> sku.getTotalPrice() > 10_000);
-
+                            .peek(sku -> System.out.println(sku.getSkuName()))
+                            // noneMatch
+                            .noneMatch(sku -> sku.getTotalPrice() > 10_000);
         System.out.println(match);
     }
 
@@ -217,11 +192,9 @@ public class StreamOperator {
     @Test
     public void findFirstTest() {
         Optional<Sku> optional = list.stream()
-
-                .peek(sku -> System.out.println(sku.getSkuName()))
-
-                // findFirst
-                .findFirst();
+                                     .peek(sku -> System.out.println(sku.getSkuName()))
+                                     // findFirst
+                                     .findFirst();
 
         System.out.println(
                 JSON.toJSONString(optional.get(), true));
@@ -233,11 +206,9 @@ public class StreamOperator {
     @Test
     public void findAnyTest() {
         Optional<Sku> optional = list.stream()
-
-                .peek(sku -> System.out.println(sku.getSkuName()))
-
-                // findAny
-                .findAny();
+                                     .peek(sku -> System.out.println(sku.getSkuName()))
+                                     // findAny
+                                     .findAny();
 
         System.out.println(
                 JSON.toJSONString(optional.get(), true));
@@ -249,10 +220,9 @@ public class StreamOperator {
     @Test
     public void maxTest() {
         OptionalDouble optionalDouble = list.stream()
-                // 获取总价
-                .mapToDouble(Sku::getTotalPrice)
-
-                .max();
+                                            // 获取总价
+                                            .mapToDouble(Sku::getTotalPrice)
+                                            .max();
 
         System.out.println(optionalDouble.getAsDouble());
     }
@@ -263,10 +233,9 @@ public class StreamOperator {
     @Test
     public void minTest() {
         OptionalDouble optionalDouble = list.stream()
-                // 获取总价
-                .mapToDouble(Sku::getTotalPrice)
-
-                .min();
+                                            // 获取总价
+                                            .mapToDouble(Sku::getTotalPrice)
+                                            .min();
 
         System.out.println(optionalDouble.getAsDouble());
     }
@@ -277,8 +246,7 @@ public class StreamOperator {
     @Test
     public void countTest() {
         long count = list.stream()
-                .count();
-
+                         .count();
         System.out.println(count);
     }
 
