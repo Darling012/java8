@@ -1,5 +1,6 @@
 package validation;
 
+import org.hibernate.validator.HibernateValidator;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -35,15 +36,20 @@ public class ValidationTest {
     @Before
     public void init() {
         // 初始化验证器
-        validator = Validation.buildDefaultValidatorFactory()
-                .getValidator();
+        // validator = Validation.buildDefaultValidatorFactory()
+        //         .getValidator();
+        validator = Validation.byProvider(HibernateValidator.class)
+                              .configure()
+                              .failFast(true)  //快速失败：只要有1个参数校验不通过，就立即停止校验参数
+                              .buildValidatorFactory()
+                              .getValidator();
 
         // 初始化待验证对象 - 用户信息
         userInfo = new UserInfo();
-//        userInfo.setUserId("zhangxiaoxi");
-        userInfo.setUserName("张小喜");
+        //        userInfo.setUserId("zhangxiaoxi");
+        //         userInfo.setUserName("张小喜");
         userInfo.setPassWord("zhangxiaoxi");
-//        userInfo.setEmail("zhangxiaoxi@sina.cn");
+        //        userInfo.setEmail("zhangxiaoxi@sina.cn");
         userInfo.setAge(30);
         Calendar calendar = Calendar.getInstance();
         calendar.set(2012, 1, 1);
@@ -52,13 +58,15 @@ public class ValidationTest {
         userInfo.setPhone("15800000000");
 
         UserInfo friend = new UserInfo();
-//        friend.setUserId("wangxiaoxi");
+        //        friend.setUserId("wangxiaoxi");
         friend.setUserName("王小喜");
         friend.setPassWord("wangxiaoxi");
-//        friend.setEmail("wangxiaoxi@sina.cn");
+        //        friend.setEmail("wangxiaoxi@sina.cn");
         friend.setPhone("15811111111");
 
-        userInfo.setFriends(new ArrayList(){{add(friend);}});
+        userInfo.setFriends(new ArrayList() {{
+            add(friend);
+        }});
     }
 
     /**
@@ -93,8 +101,8 @@ public class ValidationTest {
     @Test
     public void groupValidation() {
         set = validator.validate(userInfo,
-                UserInfo.RegisterGroup.class,
-                UserInfo.LoginGroup.class);
+                                 UserInfo.RegisterGroup.class,
+                                 UserInfo.LoginGroup.class);
     }
 
     /**
@@ -103,7 +111,7 @@ public class ValidationTest {
     @Test
     public void groupSequenceValidation() {
         set = validator.validate(userInfo,
-                UserInfo.Group.class);
+                                 UserInfo.Group.class);
     }
 
     /**
@@ -119,7 +127,7 @@ public class ValidationTest {
         UserInfoService service = new UserInfoService();
         // 待验证方法
         Method method = service.getClass()
-                .getMethod("setUserInfo", UserInfo.class);
+                               .getMethod("setUserInfo", UserInfo.class);
         // 方法输入参数
         Object[] paramObjects = new Object[]{new UserInfo()};
 
@@ -146,7 +154,7 @@ public class ValidationTest {
         // 构造要验证的方法对象
         UserInfoService service = new UserInfoService();
         Method method = service.getClass()
-                .getMethod("getUserInfo");
+                               .getMethod("getUserInfo");
 
         // 调用方法得到返回值
         Object returnValue = method.invoke(service);
@@ -178,7 +186,7 @@ public class ValidationTest {
         // 校验构造函数
         otherSet = executableValidator
                 .validateConstructorParameters(
-                constructor, paramObjects);
+                        constructor, paramObjects);
 
     }
 

@@ -89,13 +89,13 @@ public class DateTest {
         long currentMilli = instant.toEpochMilli();
         System.currentTimeMillis();
 
-        LocalDateTime dateTime = LocalDateTime.of(2020,9,2,10,47,00);
+        LocalDateTime dateTime = LocalDateTime.of(2020, 9, 2, 10, 47, 00);
         System.out.println(dateTime);
         System.out.println(dateTime.toEpochSecond(ZoneOffset.of("+8")));
 
 
         DateTimeFormatter ftf = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-        String str = ftf.format(LocalDateTime.ofInstant(Instant.ofEpochMilli(1599014820),ZoneId.of("+8")));
+        String str = ftf.format(LocalDateTime.ofInstant(Instant.ofEpochMilli(1599014820), ZoneId.of("+8")));
         System.out.println(str);
     }
 
@@ -227,6 +227,7 @@ public class DateTest {
         YearMonth creditCardExpiry = YearMonth.of(2028, Month.FEBRUARY);
         System.out.printf("Your credit card expires on %s %n", creditCardExpiry);
     }
+
     @Test
     public void isLeapYear() {
         //检查闰年
@@ -249,7 +250,7 @@ public class DateTest {
         LocalDate java8Release = LocalDate.of(2018, Month.MAY, 14);
         Period period = Period.between(today, java8Release);
         System.out.println("Months left between today and Java 8 release : "
-                + period.getMonths());
+                                   + period.getMonths());
         period.getDays();
     }
 
@@ -262,7 +263,8 @@ public class DateTest {
         LocalDateTime future = now.minusMinutes(1);
         System.out.println(future.format(dtf));
         // Integer startNum = Math.toIntExact(Duration.between(future, now).toSeconds());
-        System.out.println(Math.toIntExact(Duration.between(future, now).toMillis() / 1000));
+        System.out.println(Math.toIntExact(Duration.between(future, now)
+                                                   .toMillis() / 1000));
         // System.out.println(startNum);
     }
 
@@ -298,7 +300,16 @@ public class DateTest {
     @Test
     public void getCurrentMillis() {
         System.out.println(System.currentTimeMillis());
-        System.out.println(LocalDateTime.now().toEpochSecond(ZoneOffset.of("+8")));
+        // 时间戳
+        //获取秒数
+        Long second = LocalDateTime.now()
+                                   .toEpochSecond(ZoneOffset.of("+8"));
+        //获取毫秒数
+        Long milliSecond = LocalDateTime.now()
+                                        .toInstant(ZoneOffset.of("+8"))
+                                        .toEpochMilli();
+
+        System.out.println(second);
         DateTimeFormatter ftf = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
         String str = ftf.format(LocalDateTime.ofInstant(Instant.ofEpochMilli(1599463500), ZoneId.of("+8")));
         System.out.println(str);

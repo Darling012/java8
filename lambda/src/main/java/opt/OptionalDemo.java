@@ -70,6 +70,7 @@ public class OptionalDemo {
         // of () 方法的参数必须是非空的，也就是说不能为 null，否则仍然会抛出 NullPointerException。
         String name = null;
         // Optional<String> optnull = Optional.of(name);
+
         // 1.3可以使用静态方法 ofNullable () 创建一个即可空又可非空的 Optional 对象
         // ofNullable() 方法内部有一个三元表达式，如果为参数为 null，则返回私有常量 EMPTY；否则使用 new 关键字创建了一个新的 Optional 对象——不会再抛出 NPE 异常了。
         String name2 = null;
@@ -109,14 +110,6 @@ public class OptionalDemo {
          Optional<String> optOrNulll = Optional.ofNullable(null);
          System.out.println(optOrNulll.isPresent());// 输出：true
 
-
-
-        Optional<String> opts = Optional.of("沉默王二");
-        // 输出：false
-        System.out.println(opts.isPresent());
-         // 输出：true
-         Optional<String> optOrNulls = Optional.ofNullable(null);
-         System.out.println(optOrNulls.isPresent());
 
     }
 }

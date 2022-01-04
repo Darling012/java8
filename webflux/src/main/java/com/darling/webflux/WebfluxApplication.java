@@ -2,10 +2,9 @@ package com.darling.webflux;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.data.mongodb.repository.config.EnableReactiveMongoRepositories;
 
 @SpringBootApplication
-@EnableReactiveMongoRepositories
+// @EnableReactiveMongoRepositories
 public class WebfluxApplication {
 
 	public static void main(String[] args) {
